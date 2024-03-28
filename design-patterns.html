@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Design Patterns - Overlapping Sidebar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="layout">
+    <nav>
+      <img src="assets/inovex_coffee_logo.png" alt="inovex barista logo" />
+      <ul>
+        <li><img src="assets/dashboard_icon.png" aria-hidden="true" /><span>Dashboard</span></li>
+        <li><img src="assets/orders_icon.png" aria-hidden="true" /><span>Orders</span></li>
+        <li><img src="assets/products_icon.png" aria-hidden="true" /><span>Products</span></li>
+        <li><img src="assets/settings_icon.png" aria-hidden="true" /><span>Settings</span></li>
+      </ul>
+      <img src="assets/inovex_logo.png" alt="inovex logo" />
+    </nav>
+
+    <main>
+      <ul></ul>
+      <dialog></dialog>
+    </main>
+  </div>
+
+  <template id="item-template">
+    <li role="button">
+      <img src="" />
+      <div class="name"></div>
+      <div class="info"></div>
+    </li>
+  </template>
+
+  <template id="details-template">
+    <div class="details__layout">
+      <img src="" />
+      <div class="name"></div>
+      <div class="info"></div>
+      <button class="close">X</button>
+    </div>
+  </template>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
