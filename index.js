@@ -1,23 +1,24 @@
-const NUMBER_OF_RANDOM_ITEMS = 8;
+import { coffeeList } from './data.js';
+
+const NUMBER_OF_RANDOM_ITEMS = 22;
 
 class OverlappingSidebar {
-  constructor() {
-    // fill list with items
-    for (let i = 0; i < NUMBER_OF_RANDOM_ITEMS; i++) {
-      const name = `Name ${i + 1}`;
-      const info = `Info ${i + 1}`;
-      const item = this.addItemToList({ name, info, imgSrc: `https://i.pravatar.cc/30?img=${i + 1}` });
+  constructor(coffeeList) {
+    console.log(coffeeList)
+    coffeeList.forEach((coffee, i) => {
+      const item = this.addItemToList({ name: coffee.name, info: coffee.orderId, imgSrc: coffee.image });
+      
       item.addEventListener('click', (event) => {
         this.highlightActiveListItem(event);
-        this.openSidebar({ name, info, imgSrc: `https://i.pravatar.cc/200?img=${i + 1}` });
+        this.openSidebar({ name: coffee.name, info: coffee.orderId, imgSrc: coffee.image });
       });
       item.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
           this.highlightActiveListItem(event);
-          openSidebar({ name, info, imgSrc: `https://i.pravatar.cc/200?img=${i + 1}` });
+          openSidebar({ name: coffee.name, info: coffee.orderId, imgSrc: coffee.image });
         }
       });
-    }
+    });
   }
 
   highlightActiveListItem(event) {
@@ -75,6 +76,30 @@ class OverlappingSidebar {
   }
 }
 
+// Helper functions
 
-const demoWithOverlappingSidebar = new OverlappingSidebar();
-// TODO, add other demos here
+/**  */
+async function extendCoffeeList(coffeeList) {
+  let extendedCoffeeList = [];
+  for (let i = 0; i < NUMBER_OF_RANDOM_ITEMS; i++) {
+    const cofeeResp = await fetch(`https://api.sampleapis.com/coffee/hot/${(i + 1) % 16}`);
+    const coffeeObj = await cofeeResp.json();
+    const coffeeItemWithImg = {...coffeeList[parseInt(Math.random() * 10 % 3)], image: coffeeObj.image};
+    extendedCoffeeList = [...extendedCoffeeList, coffeeItemWithImg];
+  }
+  return extendedCoffeeList;
+}
+
+async function init() {
+  const loading = document.createElement('p');
+  loading.innerHTML = '<br /> <span>... loading</span>';
+  document.querySelector('sub').appendChild(loading);
+  // extend coffee list with random coffee items
+  const extendedCoffeeList = await extendCoffeeList(coffeeList);
+  document.querySelector('sub').removeChild(loading);
+  
+  new OverlappingSidebar(extendedCoffeeList);
+  // TODO, add other demos here
+}
+
+init();

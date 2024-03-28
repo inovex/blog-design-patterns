@@ -20,14 +20,19 @@ p {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
+    align-items: flex-start;
 
-    >img {}
+    >img:first-child {
+      margin: 24px 0 42px 0;
+    }
 
     >ul {
       list-style: none;
       display: flex;
       flex-flow: column nowrap;
+      flex: 10;
       gap: 12px;
+      padding: 0;
       margin: 0;
 
       >li {
@@ -43,10 +48,15 @@ p {
     display: grid;
     grid-template-rows: repeat(auto-fill, minmax(auto, 60px));
     grid-template-columns: auto;
+    padding: 42px;
+
+    >sub {
+      color: #888;
+    }
 
     >ul {
       list-style: none;
-      padding: 12px;
+      padding: 0;
       margin: 0;
       display: grid;
       grid-template-rows: repeat(auto-fill, minmax(auto, 60px));
@@ -57,18 +67,27 @@ p {
         /* good example for subgrid: https://codepen.io/web-dot-dev/pen/NWezjXv */
         grid-template-columns: subgrid;
         grid-column: span 3;
-        border: 2px solid #5598da;
-        background-color: #e4f6ff;
-        border-radius: 4px;
+        border: 2px solid #eee;
+        border-top: 0;
         padding: 6px;
-        margin: 6px;
         cursor: pointer;
         transition: background-color 0.25s ease-in-out, transform 0.1s ease-in-out;
 
+        &:first-child {
+          border-top: 1px solid #eee;
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+        }
+
+        &:last-child {
+          border-bottom-left-radius: 8px;
+          border-bottom-right-radius: 8px;
+        }
+
         &:hover,
         &.active {
-          background-color: #d3eaf6;
-          border: 2px solid orange;
+          background-color: #e8e8e8;
+          border: 1px solid rgb(162, 129, 68);
         }
 
         >img {
@@ -90,7 +109,8 @@ p {
       padding: 12px;
       box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
       border: 3px dotted lightgrey;
-      border-radius: 16px;
+      border-top-left-radius: 16px;
+      border-bottom-left-radius: 16px;
       transition: transform 0.2s ease-in-out, box-shadow 0.75s ease-out;
       transform: translateX(100%);
 
