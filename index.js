@@ -4,10 +4,9 @@ const NUMBER_OF_RANDOM_ITEMS = 22;
 
 class OverlappingSidebar {
   constructor(coffeeList) {
-    console.log(coffeeList)
     coffeeList.forEach((coffee, i) => {
       const item = this.addItemToList({ name: coffee.name, info: coffee.orderId, imgSrc: coffee.image });
-      
+
       item.addEventListener('click', (event) => {
         this.highlightActiveListItem(event);
         this.openSidebar({ name: coffee.name, info: coffee.orderId, imgSrc: coffee.image });
@@ -78,27 +77,8 @@ class OverlappingSidebar {
 
 // Helper functions
 
-/**  */
-async function extendCoffeeList(coffeeList) {
-  let extendedCoffeeList = [];
-  for (let i = 0; i < NUMBER_OF_RANDOM_ITEMS; i++) {
-    const cofeeResp = await fetch(`https://api.sampleapis.com/coffee/hot/${(i + 1) % 16}`);
-    const coffeeObj = await cofeeResp.json();
-    const coffeeItemWithImg = {...coffeeList[parseInt(Math.random() * 10 % 3)], image: coffeeObj.image};
-    extendedCoffeeList = [...extendedCoffeeList, coffeeItemWithImg];
-  }
-  return extendedCoffeeList;
-}
-
 async function init() {
-  const loading = document.createElement('p');
-  loading.innerHTML = '<br /> <span>... loading</span>';
-  document.querySelector('sub').appendChild(loading);
-  // extend coffee list with random coffee items
-  const extendedCoffeeList = await extendCoffeeList(coffeeList);
-  document.querySelector('sub').removeChild(loading);
-  
-  new OverlappingSidebar(extendedCoffeeList);
+  new OverlappingSidebar(coffeeList);
   // TODO, add other demos here
 }
 
