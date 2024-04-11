@@ -1,0 +1,243 @@
+body,
+p {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Consider users that don't want motion. */
+@media (prefers-reduced-motion) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* View Transition Styles */
+/* disable defaults */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0s;
+}
+
+/* element swap */
+::view-transition-old(details) {
+  animation: slide-down 0.3s both ease-in;
+}
+
+::view-transition-new(details) {
+  animation: slide-up 0.2s both ease-in;
+}
+
+/* element leave */
+::view-transition-old(details):only-child {
+  animation: slide-in 0.2s both ease-in reverse;
+}
+
+/* element enter */
+::view-transition-new(details):only-child {
+  animation: slide-in 0.2s both ease-out;
+}
+
+@container list (max-width: 800px) {
+  .info {
+    display: none;
+  }
+}
+
+.layout {
+  display: grid;
+  grid-template-rows: minmax(100vh, 100%);
+  grid-template-columns: minmax(100px, 0.2fr) 1fr;
+
+  > nav {
+    background: #1A191F;
+    color: white;
+    padding: 30px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    > img:first-child {
+      margin: 24px 0 42px 0;
+    }
+
+    > ul {
+      list-style: none;
+      display: flex;
+      flex-flow: column nowrap;
+      flex: 10;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+
+      > li {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        gap: 16px;
+        padding: 13px 16px 13px 0;
+      }
+    }
+  }
+
+  > main {
+    display: grid;
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-columns: 1fr auto;
+    overflow: hidden;
+    gap: 16px;
+    padding: 42px;
+
+    &:has(aside[style*="display: none;"]),
+      &:not(:has(aside)) {
+        grid-template-columns: 1fr;
+    }
+
+    .title {
+      grid-column: 1 / 3;
+      > h1 {
+        white-space: nowrap;
+      }
+
+      > sub {
+        color: #888;
+      }
+    }
+
+    > ul {
+      container-name: list;
+      container-type: inline-size;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-rows: repeat(auto-fill, minmax(auto, 60px));
+      grid-template-columns: auto;
+
+      > li {
+        --border-width: 2px;
+        --border-radius: 8px;
+
+        display: grid;
+        /* good example for subgrid: https://codepen.io/web-dot-dev/pen/NWezjXv */
+        grid-template-columns: subgrid;
+        grid-column: span 3;
+        align-items: center;
+        border: var(--border-width) solid #eee;
+        border-top-color: transparent;
+        padding: 6px;
+        cursor: pointer;
+        transition: background-color 0.25s ease-in-out, transform 0.1s ease-in-out;
+
+        &:first-child {
+          border-top-color: #eee;
+          border-top-left-radius: var(--border-radius);
+          border-top-right-radius: var(--border-radius);
+        }
+
+        &:last-child {
+          border-bottom-left-radius: var(--border-radius);
+          border-bottom-right-radius: var(--border-radius);
+        }
+
+        &:hover,
+        &.active {
+          background-color: #e8e8e8;
+          border: var(--border-width) solid rgb(162, 129, 68);
+      }
+
+        > img {
+          border-radius: 50%;
+        }
+      }
+    }
+
+    > aside {
+      view-transition-name: details;
+      display: none; /* TODO: should this be set initially? */
+      min-width: 250px;
+      padding: 12px;
+      border: 3px dotted lightgrey;
+      border-radius: 16px;
+      background: white;
+
+      > .details__layout {
+        position: relative;
+        display: flex;
+        flex-flow: column;
+        padding: 0 2rem 2rem;
+
+        > img {
+          margin: 1rem 2rem;
+          border-radius: 50%;
+          box-shadow: 0px 0px 0px 0px blue;
+        }
+
+        > .name {
+          font-size: 2rem;
+        }
+
+        > .info {
+          color: gray;
+        }
+
+        > .close {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          border-radius: 50%;
+          border: none;
+          padding: 0.5rem;
+          background-color: #e6e6e6;
+          width: 2rem;
+          height: 2rem;
+          cursor: pointer;
+          transition: background-color 0.25s ease-in-out;
+
+          &:hover {
+            background-color: #c1c1c1;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .layout {
+    grid-template-columns: 200px 1fr;
+  }
+}
