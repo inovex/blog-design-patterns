@@ -68,8 +68,13 @@ p {
       padding: 0;
       margin: 0;
       display: grid;
-      grid-template-rows: repeat(auto-fill, minmax(auto, 60px));
-      grid-template-columns: auto;
+      border: 1px solid #EAECF0;
+      border-radius: 12px;
+      grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
+      grid-template-columns: min-content auto auto;
+      height: fit-content;
+      gap: 0 12px;
+      overflow: hidden;
 
       >li {
         --border-width: 2px;
@@ -88,13 +93,9 @@ p {
 
         &:first-child {
           border-top-color: #eee;
-          border-top-left-radius: var(--border-radius);
-          border-top-right-radius: var(--border-radius);
         }
 
         &:last-child {
-          border-bottom-left-radius: var(--border-radius);
-          border-bottom-right-radius: var(--border-radius);
           border-bottom: none;
         }
 
@@ -122,8 +123,8 @@ p {
       border-top: none;
       border-bottom: none;
       border-right: none;
-      border-left: 1px solid var(--Colors-Border-border-secondary, #EAECF0);
-      background: var(--Colors-Background-bg-primary, #FFF);
+      border-left: 1px solid #EAECF0;
+      background: #FFF;
       box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.08), 0px 8px 8px -4px rgba(16, 24, 40, 0.03);
       transition: transform 0.2s ease-in-out, box-shadow 0.75s ease-out;
       transform: translateX(100%);

@@ -44,6 +44,7 @@ class OverlappingSidebar {
     detailsTempClonePaymentBadge.textContent = paymentType;
     detailsEl.querySelector('.empty-content')?.remove();
     detailsTempCloneClose.addEventListener('click', (event) => {
+      document.querySelectorAll('main > ul > li').forEach((item) => item.classList.remove('active'));
       detailsEl.close();
     });
     detailsEl.replaceChildren(detailsTempClone);

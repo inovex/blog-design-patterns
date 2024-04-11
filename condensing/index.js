@@ -5,16 +5,12 @@ class CondensingSidebar {
     coffeeList.forEach((coffee, i) => {
       const item = this.addItemToList({ name: coffee.name, info: coffee.orderId, imgSrc: coffee.image });
 
-      item.addEventListener('click', (event) => {
+      const highlightItemAndOpenSidebar = (event) => {
         this.highlightActiveListItem(event);
-        this.openSidebar({ name: coffee.name, info: coffee.orderId, imgSrc: coffee.image });
-      });
-      item.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-          this.highlightActiveListItem(event);
-          this.openSidebar({ name: coffee.name, info: coffee.orderId, imgSrc: coffee.image });
-        }
-      });
+        this.openSidebar(coffee);
+      }
+      item.addEventListener('click', highlightItemAndOpenSidebar);
+      item.addEventListener('keypress', highlightItemAndOpenSidebar);
     });
   }
 
@@ -23,25 +19,34 @@ class CondensingSidebar {
     event.currentTarget.classList.add('active');
   }
 
-  openSidebar({name, info, imgSrc}) {
+  openSidebar({ name, orderId, paymentType, executedBy, image, description }) {
     const detailsTempClone = document.querySelector('#details-template').content.cloneNode(true);
-    const detailsTempCloneImg = detailsTempClone.querySelector('img');
-    const detailsTempCloneFirstBox = detailsTempClone.querySelector('.name');
-    const detailsTempCloneSecondBox = detailsTempClone.querySelector('.info');
+    const detailsTempCloneImg = detailsTempClone.querySelector('img.product');
+    const detailsTempCloneName = detailsTempClone.querySelector('.name');
+    const detailsTempClonePaymentBadge = detailsTempClone.querySelector('.payment-badge');
+    const detailsTempCloneEmail = detailsTempClone.querySelector('.header .email');
+    const detailsTempCloneOrderId = detailsTempClone.querySelector('.header .order-id');
+    const detailsTempCloneAbout = detailsTempClone.querySelector('.info .about');
+    const detailsTempCloneDesc = detailsTempClone.querySelector('.info .description');
     const detailsTempCloneClose = detailsTempClone.querySelector('.close');
     const detailsEl = document.querySelector('aside');
 
     detailsTempCloneClose.addEventListener('click', (event) => {
       safeStartViewTransition(() => {
+        document.querySelectorAll('main > ul > li').forEach((item) => item.classList.remove('active'));
         detailsEl.style.display = 'none';
       })
     });
     safeStartViewTransition(() => {
-      detailsTempCloneImg.src = imgSrc;
+      detailsTempCloneImg.src = image;
       detailsTempCloneImg.width = 170;
       detailsTempCloneImg.height = 170;
-      detailsTempCloneFirstBox.textContent = name;
-      detailsTempCloneSecondBox.textContent = info;
+      detailsTempCloneName.textContent = name;
+      detailsTempCloneEmail.textContent = executedBy.mail;
+      detailsTempCloneOrderId.textContent = `Order ID: ${orderId}`;
+      detailsTempCloneAbout.textContent = `About ${name}`;
+      detailsTempCloneDesc.textContent = description;
+      detailsTempClonePaymentBadge.textContent = paymentType;
       detailsEl.replaceChildren(detailsTempClone);
       detailsEl.style.display = 'block';
     });
@@ -67,7 +72,7 @@ class CondensingSidebar {
 
 // Helper functions
 
-function safeStartViewTransition (updateDom) {
+function safeStartViewTransition(updateDom) {
   if (!document.startViewTransition) {
     updateDom();
     return;

@@ -5,16 +5,12 @@ class ReservedSidebar {
     coffeeList.forEach((coffee, i) => {
       const item = this.addItemToList({ name: coffee.name, info: coffee.orderId, imgSrc: coffee.image });
 
-      item.addEventListener('click', (event) => {
+      const highlightItemAndReplaceSidebarContent = (event) => {
         this.highlightActiveListItem(event);
-        this.replaceSidebarContent({ name: coffee.name, info: coffee.orderId, imgSrc: coffee.image });
-      });
-      item.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-          this.highlightActiveListItem(event);
-          openSidebar({ name: coffee.name, info: coffee.orderId, imgSrc: coffee.image });
-        }
-      });
+        this.replaceSidebarContent(coffee);
+      }
+      item.addEventListener('click', highlightItemAndReplaceSidebarContent);
+      item.addEventListener('keypress', highlightItemAndReplaceSidebarContent);
     });
   }
 
@@ -23,18 +19,26 @@ class ReservedSidebar {
     event.currentTarget.classList.add('active');
   }
 
-  replaceSidebarContent({name, info, imgSrc}) {
+  replaceSidebarContent({ name, orderId, paymentType, executedBy, image, description }) {
     const detailsTempClone = document.querySelector('#details-template').content.cloneNode(true);
-    const detailsTempCloneImg = detailsTempClone.querySelector('img');
-    const detailsTempCloneFirstBox = detailsTempClone.querySelector('.name');
-    const detailsTempCloneSecondBox = detailsTempClone.querySelector('.info');
+    const detailsTempCloneImg = detailsTempClone.querySelector('img.product');
+    const detailsTempCloneName = detailsTempClone.querySelector('.name');
+    const detailsTempClonePaymentBadge = detailsTempClone.querySelector('.payment-badge');
+    const detailsTempCloneEmail = detailsTempClone.querySelector('.header .email');
+    const detailsTempCloneOrderId = detailsTempClone.querySelector('.header .order-id');
+    const detailsTempCloneAbout = detailsTempClone.querySelector('.info .about');
+    const detailsTempCloneDesc = detailsTempClone.querySelector('.info .description');
     const detailsEl = document.querySelector('aside');
 
-    detailsTempCloneImg.src = imgSrc;
+    detailsTempCloneImg.src = image;
     detailsTempCloneImg.width = 250;
     detailsTempCloneImg.height = 250;
-    detailsTempCloneFirstBox.textContent = name;
-    detailsTempCloneSecondBox.textContent = info;
+    detailsTempCloneName.textContent = name;
+    detailsTempCloneEmail.textContent = executedBy.mail;
+    detailsTempCloneOrderId.textContent = `Order ID: ${orderId}`;
+    detailsTempCloneAbout.textContent = `About ${name}`;
+    detailsTempCloneDesc.textContent = description;
+    detailsTempClonePaymentBadge.textContent = paymentType;
     detailsEl.replaceChildren(detailsTempClone);
     animateBorderOnImgLoad(detailsTempCloneImg);
   }
