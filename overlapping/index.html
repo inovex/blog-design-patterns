@@ -29,7 +29,7 @@
   </main>
 
   <template id="item-template">
-    <li role="button">
+    <li role="button" tabindex="0">
       <img src="" />
       <div class="name"></div>
       <div class="info"></div>
@@ -38,10 +38,29 @@
 
   <template id="details-template">
     <div class="details__layout">
-      <img src="" />
-      <div class="name"></div>
-      <div class="info"></div>
-      <button class="close">X</button>
+      <div class="title">
+        <h2>Order</h2>
+        <button class="close"></button>
+      </div>
+      <div class="presentation">
+        <img class="hero" src="../assets/hero.png" />
+        <div class="product-with-badge">
+          <img class="product" src="" />
+          <img class="verified-badge" src="../assets/verified_badge.svg" />
+        </div>
+      </div>
+      <div class="header">
+        <div class="headline">
+          <h3 class="name"></h3>
+          <span class="payment-badge"></span>
+        </div>
+        <sub class="email"></sub>
+        <sub class="order-id"></sub>
+      </div>
+      <div class="info">
+        <h4 class="about"></h4>
+        <p class="description"></p>
+      </div>
     </div>
   </template>
 
