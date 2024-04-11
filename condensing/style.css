@@ -129,7 +129,7 @@ p {
         grid-template-columns: subgrid;
         grid-column: span 3;
         align-items: center;
-        border: var(--border-width) solid #eee;
+        border-bottom: var(--border-width) solid #eee;
         border-top-color: transparent;
         padding: 6px;
         cursor: pointer;
@@ -144,12 +144,12 @@ p {
         &:last-child {
           border-bottom-left-radius: var(--border-radius);
           border-bottom-right-radius: var(--border-radius);
+          border-bottom: none;
         }
 
         &:hover,
         &.active {
           background-color: #e8e8e8;
-          border: var(--border-width) solid rgb(162, 129, 68);
       }
 
         > img {
