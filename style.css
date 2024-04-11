@@ -75,6 +75,7 @@ p {
         /* good example for subgrid: https://codepen.io/web-dot-dev/pen/NWezjXv */
         grid-template-columns: subgrid;
         grid-column: span 3;
+        align-items: center;
         border: var(--border-width) solid #eee;
         border-top-color: transparent;
         padding: 6px;
