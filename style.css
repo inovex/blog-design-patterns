@@ -13,7 +13,7 @@ p {
   grid-template-rows: minmax(100vh, 100%);
   grid-template-columns: 300px 1fr;
 
-  >nav {
+  > nav {
     background: #1A191F;
     color: white;
     padding: 30px;
@@ -22,11 +22,11 @@ p {
     justify-content: space-between;
     align-items: flex-start;
 
-    >img:first-child {
+    > img:first-child {
       margin: 24px 0 42px 0;
     }
 
-    >ul {
+    > ul {
       list-style: none;
       display: flex;
       flex-flow: column nowrap;
@@ -35,7 +35,7 @@ p {
       padding: 0;
       margin: 0;
 
-      >li {
+      > li {
         display: flex;
         flex-flow: row nowrap;
         gap: 16px;
@@ -44,17 +44,21 @@ p {
     }
   }
 
-  >main {
+  > main {
     display: grid;
     grid-template-rows: repeat(auto-fill, minmax(auto, 60px));
     grid-template-columns: auto;
     padding: 42px;
 
-    >sub {
+    > h1 {
+      white-space: nowrap;
+    }
+
+    > sub {
       color: #888;
     }
 
-    >ul {
+    > ul {
       list-style: none;
       padding: 0;
       margin: 0;
@@ -62,41 +66,44 @@ p {
       grid-template-rows: repeat(auto-fill, minmax(auto, 60px));
       grid-template-columns: auto;
 
-      >li {
+      > li {
+        --border-width: 2px;
+        --border-radius: 8px;
+
         display: grid;
         /* good example for subgrid: https://codepen.io/web-dot-dev/pen/NWezjXv */
         grid-template-columns: subgrid;
         grid-column: span 3;
-        border: 2px solid #eee;
-        border-top: 0;
+        border: var(--border-width) solid #eee;
+        border-top-color: transparent;
         padding: 6px;
         cursor: pointer;
         transition: background-color 0.25s ease-in-out, transform 0.1s ease-in-out;
 
         &:first-child {
-          border-top: 1px solid #eee;
-          border-top-left-radius: 8px;
-          border-top-right-radius: 8px;
+          border-top-color: #eee;
+          border-top-left-radius: var(--border-radius);
+          border-top-right-radius: var(--border-radius);
         }
 
         &:last-child {
-          border-bottom-left-radius: 8px;
-          border-bottom-right-radius: 8px;
+          border-bottom-left-radius: var(--border-radius);
+          border-bottom-right-radius: var(--border-radius);
         }
 
         &:hover,
         &.active {
           background-color: #e8e8e8;
-          border: 1px solid rgb(162, 129, 68);
-        }
+          border: var(--border-width) solid rgb(162, 129, 68);
+      }
 
-        >img {
+        > img {
           border-radius: 50%;
         }
       }
     }
 
-    >dialog {
+    > dialog {
       position: fixed;
       display: block;
       top: 0;
@@ -119,13 +126,13 @@ p {
         box-shadow: 0px 0px 75px rgba(0, 0, 0, 0.5);
       }
 
-      >.details__layout {
+      > .details__layout {
         position: relative;
         display: flex;
         flex-flow: column;
         padding: 0 2rem 2rem 2rem;
 
-        >img {
+        > img {
           margin: 1rem 2rem;
           border-radius: 50%;
           box-shadow: 0px 0px 0px 0px blue;
@@ -135,15 +142,15 @@ p {
           }
         }
 
-        >.name {
+        > .name {
           font-size: 2rem;
         }
 
-        >.info {
+        > .info {
           color: gray;
         }
 
-        >.close {
+        > .close {
           position: absolute;
           top: 1rem;
           right: 1rem;
@@ -172,5 +179,11 @@ p {
 
   100% {
     box-shadow: 0px 0px 5px 10px rgba(0, 119, 255, 0);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .layout {
+    grid-template-columns: 200px 1fr;
   }
 }
