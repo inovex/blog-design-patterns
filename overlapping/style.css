@@ -10,17 +10,20 @@ p {
 
 .layout {
   display: grid;
-  grid-template-rows: minmax(100vh, 100%);
+  grid-template-rows: 100vh;
   grid-template-columns: 300px 1fr;
 
   > nav {
-    background: #1A191F;
-    color: white;
-    padding: 30px;
+    container-type: inline-size;
+    container-name: sidebar;
+
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: flex-start;
+    background: #1A191F;
+    color: white;
+    padding: 30px;
 
     > img:first-child {
       margin: 24px 0 42px 0;
@@ -50,6 +53,7 @@ p {
     grid-template-rows: repeat(auto-fill, minmax(auto, 60px));
     grid-template-columns: auto;
     padding: 42px;
+    overflow: auto;
 
     > h1 {
       white-space: nowrap;
@@ -184,8 +188,32 @@ p {
   }
 }
 
+@container sidebar (max-width: 200px) {
+  span {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .layout {
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 92px 1fr;
+    
+    > nav {
+      padding: 16px;
+      align-items: center;
+
+      > ul { 
+        > li {
+          padding: 13px 0;
+        }
+      }
+    }
+  }
+  
+}
+
+@media screen and (max-width: 512px) {
+  .layout {
+    grid-template-columns: 92px 1fr;
   }
 }
