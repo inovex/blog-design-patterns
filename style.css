@@ -38,8 +38,9 @@ p {
       > li {
         display: flex;
         flex-flow: row nowrap;
+        align-items: center;
         gap: 16px;
-        padding: 13px 16px;
+        padding: 13px 16px 13px 0;
       }
     }
   }
