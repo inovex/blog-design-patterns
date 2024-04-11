@@ -1,6 +1,4 @@
-import { coffeeList } from './data.js';
-
-const NUMBER_OF_RANDOM_ITEMS = 22;
+import { coffeeList } from '../data.js';
 
 class OverlappingSidebar {
   constructor(coffeeList) {
