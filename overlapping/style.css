@@ -4,14 +4,19 @@ p {
   font-family: Inter, system-ui, sans-serif;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
+
 * {
   box-sizing: border-box;
 }
 
 .layout {
   display: grid;
-  grid-template-rows: 100vh;
-  grid-template-columns: 300px 1fr;
+  grid-template-rows: minmax(100vh, 100%);
+  grid-template-columns: minmax(100px, 0.2fr) 1fr;
 
   >nav {
     container-type: inline-size;
@@ -44,6 +49,12 @@ p {
         align-items: center;
         gap: 16px;
         padding: 13px 16px 13px 0;
+
+        >a {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
       }
     }
   }
@@ -284,7 +295,7 @@ p {
   }
 }
 
-@container sidebar (max-width: 200px) {
+@container sidebar (max-width: 100px) {
   span {
     display: none;
   }
