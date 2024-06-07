@@ -15,7 +15,6 @@ a {
 
 /* Consider users that don't want motion. */
 @media (prefers-reduced-motion) {
-
   ::view-transition-group(*),
   ::view-transition-old(*),
   ::view-transition-new(*) {
@@ -32,11 +31,11 @@ a {
 
 /* element swap */
 ::view-transition-old(details) {
-  animation: slide-down 0.3s both ease-in;
+  animation: slide-down 0.2s both ease-in-out;
 }
 
 ::view-transition-new(details) {
-  animation: slide-up 0.2s both ease-in;
+  animation: slide-up 0.2s both ease-in-out;
 }
 
 /* element leave */
@@ -63,7 +62,7 @@ a {
   >nav {
     container-type: inline-size;
     container-name: sidebar;
-    
+
     background: #1A191F;
     color: white;
     padding: 30px;
@@ -349,21 +348,25 @@ a {
 
 @keyframes slide-up {
   from {
-    transform: translateY(-100%);
+    transform: translateX(100%);
+    opacity: 0;
   }
 
   to {
-    transform: translateY(0);
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 
 @keyframes slide-down {
   from {
-    transform: translateY(0);
+    transform: translateX(0);
+    opacity: 1;
   }
 
   to {
-    transform: translateY(100%);
+    transform: translateX(100%);
+    opacity: 0;
   }
 }
 
