@@ -61,20 +61,27 @@ a {
 
   >main {
     display: grid;
-    grid-template-rows: repeat(auto-fill, minmax(auto, 60px));
+    grid-template-rows: repeat(auto-fill, minmax(auto, 100px));
     grid-template-columns: auto;
     padding: 42px;
     overflow: auto;
 
-    >h1 {
-      white-space: nowrap;
-    }
+    .title {
+      grid-column: 1 / 2;
 
-    >sub {
-      color: #888;
+      >h1 {
+        white-space: nowrap;
+        margin-bottom: 4px;
+      }
+
+      >sub {
+        color: #888;
+      }
     }
 
     >ul {
+      container-name: list;
+      container-type: inline-size;
       list-style: none;
       padding: 0;
       margin: 0;
@@ -82,7 +89,7 @@ a {
       border: 1px solid #EAECF0;
       border-radius: 12px;
       grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
-      grid-template-columns: min-content auto auto;
+      grid-template-columns: min-content auto auto auto;
       height: fit-content;
       gap: 0 12px;
       overflow: hidden;
@@ -94,7 +101,7 @@ a {
         display: grid;
         /* good example for subgrid: https://codepen.io/web-dot-dev/pen/NWezjXv */
         grid-template-columns: subgrid;
-        grid-column: span 3;
+        grid-column: span 4;
         align-items: center;
         border-bottom: var(--border-width) solid #eee;
         border-top-color: transparent;
@@ -258,7 +265,8 @@ a {
           }
 
           >sub.email,
-          >sub.order-id {
+          >sub.order-id,
+          >sub.quantity {
             font-size: 1rem;
             color: #475467;
           }
@@ -292,6 +300,21 @@ a {
 
   100% {
     box-shadow: 0px 0px 5px 10px rgba(0, 119, 255, 0);
+  }
+}
+
+@container list (max-width: 400px) {
+  .info {
+    display: none;
+  }
+  .quantity {
+    display: none;
+  }
+}
+
+@container list (max-width: 600px) {
+  .quantity {
+    display: none;
   }
 }
 
