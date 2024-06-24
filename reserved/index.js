@@ -12,6 +12,8 @@ class ReservedSidebar {
       item.addEventListener('click', highlightItemAndReplaceSidebarContent);
       item.addEventListener('keypress', highlightItemAndReplaceSidebarContent);
     });
+    const loadingPlaceholder = document.querySelector('li.placeholder');
+    loadingPlaceholder.remove();
   }
 
   highlightActiveListItem(event) {
@@ -42,7 +44,7 @@ class ReservedSidebar {
     detailsTempCloneDesc.textContent = description;
     detailsTempClonePaymentBadge.textContent = paymentType;
     detailsEl.replaceChildren(detailsTempClone);
-    animateBorderOnImgLoad(detailsTempCloneImg);
+    this.animateBorderOnImgLoad(detailsTempCloneImg);
   }
 
   addItemToList({ name, quantity, info, imgSrc }) {

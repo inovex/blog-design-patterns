@@ -12,6 +12,8 @@ class CondensingSidebar {
       item.addEventListener('click', highlightItemAndOpenSidebar);
       item.addEventListener('keypress', highlightItemAndOpenSidebar);
     });
+    const loadingPlaceholder = document.querySelector('li.placeholder');
+    loadingPlaceholder.remove();
   }
 
   highlightActiveListItem(event) {
@@ -88,7 +90,6 @@ function safeStartViewTransition(updateDom) {
 
 async function init() {
   new CondensingSidebar(coffeeList);
-  // TODO, add other demos here
 }
 
 init();

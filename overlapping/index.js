@@ -12,6 +12,8 @@ class OverlappingSidebar {
       item.addEventListener('click', highlightItemAndOpenSidebar);
       item.addEventListener('keypress', highlightItemAndOpenSidebar);
     });
+    const loadingPlaceholder = document.querySelector('li.placeholder');
+    loadingPlaceholder.remove();
   }
 
   highlightActiveListItem(event) {

@@ -31,21 +31,21 @@ a {
 
 /* element swap */
 ::view-transition-old(details) {
-  animation: slide-down 0.2s both ease-in-out;
+  animation: slide-start 0.24s both ease-in-out;
 }
 
 ::view-transition-new(details) {
-  animation: slide-up 0.2s both ease-in-out;
+  animation: slide-end 0.24s both ease-in-out;
 }
 
 /* element leave */
 ::view-transition-old(details):only-child {
-  animation: slide-in 0.2s both ease-in reverse;
+  animation: slide-in 0.24s both ease-in reverse;
 }
 
 /* element enter */
 ::view-transition-new(details):only-child {
-  animation: slide-in 0.2s both ease-out;
+  animation: slide-in 0.24s both ease-out;
 }
 
 @container list (max-width: 400px) {
@@ -362,7 +362,7 @@ a {
   }
 }
 
-@keyframes slide-up {
+@keyframes slide-end {
   from {
     transform: translateX(100%);
     opacity: 0;
@@ -374,7 +374,7 @@ a {
   }
 }
 
-@keyframes slide-down {
+@keyframes slide-start {
   from {
     transform: translateX(0);
     opacity: 1;
