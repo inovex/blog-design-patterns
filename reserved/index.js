@@ -80,7 +80,6 @@ class ReservedSidebar {
 
 async function init() {
   new ReservedSidebar(coffeeList);
-  // TODO, add other demos here
 }
 
 init();

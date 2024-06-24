@@ -88,7 +88,6 @@ class OverlappingSidebar {
 
 async function init() {
   new OverlappingSidebar(coffeeList);
-  // TODO, add other demos here
 }
 
 init();
