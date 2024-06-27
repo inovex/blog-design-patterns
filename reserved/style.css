@@ -32,6 +32,7 @@ a {
 
     >img:first-child {
       margin: 24px 0 42px 0;
+      transform: translateX(-12px);
     }
 
     >ul {
