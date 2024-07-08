@@ -348,3 +348,25 @@ a {
     grid-template-columns: 92px 1fr;
   }
 }
+
+@media screen and (max-width: 1200px) {
+  .layout {
+    >nav {
+      >img:first-child {
+        width: 135px;
+        height: auto;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .layout {
+    >nav {
+      >img:first-child {
+        width: 100px;
+        height: auto;
+      }
+    }
+  }
+}
