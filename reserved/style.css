@@ -15,7 +15,7 @@ a {
 
 .layout {
   display: grid;
-  grid-template-rows: minmax(100vh, 100%);
+  grid-template-rows: 100vh;
   grid-template-columns: minmax(100px, 0.2fr) 1fr;
 
   >nav {
