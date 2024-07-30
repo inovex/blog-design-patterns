@@ -5,3 +5,4 @@ With three examples in three different folders, we want to show best practices o
 
 
 👀 See demo landingpage here: https://inovex.github.io/blog-design-patterns/
+ℹ️ The demos were mainly built for the desktop. Mobile views are not ideal and do not showcase what we would recommend.
