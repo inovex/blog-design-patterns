@@ -65,27 +65,29 @@ a {
 
 .layout {
   display: grid;
-  grid-template-rows: 100vh;
-  grid-template-columns: minmax(100px, 0.2fr) 1fr;
+  grid-template-rows: 100dvh;
+  grid-template-columns: 100px 1fr;
 
-  >nav {
+  > nav {
     container-type: inline-size;
     container-name: sidebar;
 
-    background: #1A191F;
+    background: #1a191f;
     color: white;
-    padding: 30px;
+    padding: 12px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: flex-start;
 
-    >img:first-child {
+    > img:first-child {
       margin: 24px 0 42px 0;
       transform: translateX(-12px);
+      width: 100px;
+      height: auto;
     }
 
-    >ul {
+    > ul {
       list-style: none;
       display: flex;
       flex-flow: column nowrap;
@@ -93,15 +95,16 @@ a {
       gap: 12px;
       padding: 0;
       margin: 0;
+      align-self: center;
 
-      >li {
+      > li {
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
         gap: 16px;
-        padding: 13px 16px 13px 0;
+        padding: 13px 16px;
 
-        >a {
+        > a {
           display: flex;
           align-items: center;
           gap: 16px;
@@ -110,13 +113,13 @@ a {
     }
   }
 
-  >main {
+  > main {
     display: grid;
     grid-template-rows: min-content 1fr;
     grid-template-columns: 1fr auto;
-    overflow: hidden;
+    overflow: auto;
     gap: 16px;
-    padding: 0 42px;
+    padding: 0 24px;
 
     &:has(aside[style*="display: none;"]),
     &:not(:has(aside)) {
@@ -127,17 +130,17 @@ a {
       grid-column: 1 / 2;
       margin-top: 42px;
 
-      >h1 {
+      > h1 {
         white-space: nowrap;
         margin-bottom: 4px;
       }
 
-      >sub {
+      > sub {
         color: #888;
       }
     }
 
-    >ul {
+    > ul {
       container-name: list;
       container-type: inline-size;
       grid-row: 2 / 3;
@@ -145,7 +148,7 @@ a {
       padding: 0;
       margin: 0;
       display: grid;
-      border: 1px solid #EAECF0;
+      border: 1px solid #eaecf0;
       border-radius: 12px;
       grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
       grid-template-columns: min-content auto auto auto;
@@ -153,7 +156,7 @@ a {
       gap: 0 12px;
       overflow: hidden;
 
-      >li {
+      > li {
         --border-width: 2px;
         --border-radius: 8px;
 
@@ -166,7 +169,8 @@ a {
         border-top-color: transparent;
         padding: 6px;
         cursor: pointer;
-        transition: background-color 0.25s ease-in-out, transform 0.1s ease-in-out;
+        transition: background-color 0.25s ease-in-out,
+          transform 0.1s ease-in-out;
 
         &.list-header {
           &:hover {
@@ -191,13 +195,13 @@ a {
           background-color: #e8e8e8;
         }
 
-        >img {
+        > img {
           border-radius: 50%;
         }
       }
     }
 
-    >aside {
+    > aside {
       view-transition-name: details;
       grid-row: 1 / 3;
       display: none;
@@ -205,10 +209,10 @@ a {
       border-top: none;
       border-bottom: none;
       border-right: none;
-      border-left: 1px solid #EAECF0;
+      border-left: 1px solid #eaecf0;
       margin-right: -42px;
 
-      >.details__layout {
+      > .details__layout {
         --padding: 12px;
 
         display: flex;
@@ -225,11 +229,11 @@ a {
             font-size: 1.25rem;
           }
 
-          >.close {
+          > .close {
             border-radius: 50%;
             border: none;
             padding: 0.5rem;
-            background: url('../assets/close.svg');
+            background: url("../assets/close.svg");
             background-repeat: no-repeat;
             background-position: center;
             width: 2rem;
@@ -243,13 +247,13 @@ a {
           }
         }
 
-        >.presentation {
+        > .presentation {
           --product-size: 96px;
 
           position: relative;
           margin-bottom: calc(var(--product-size) / 2);
 
-          >img.hero {
+          > img.hero {
             width: auto;
             height: 120px;
             margin-left: calc(-1 * var(--padding));
@@ -264,7 +268,7 @@ a {
             left: 0;
             transform: translate(10%, 50%);
 
-            >img.product {
+            > img.product {
               position: absolute;
               width: var(--product-size);
               height: auto;
@@ -279,7 +283,7 @@ a {
               }
             }
 
-            >img.verified-badge {
+            > img.verified-badge {
               position: absolute;
               bottom: 0;
               right: 0;
@@ -287,20 +291,20 @@ a {
           }
         }
 
-        >.header {
+        > .header {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
           gap: 4px;
           margin: 16px 0;
 
-          >.headline {
+          > .headline {
             display: flex;
             flex-flow: row wrap;
             align-items: center;
             gap: 8px;
 
-            >.name {
+            > .name {
               margin: 0;
               font-size: 1.5rem;
             }
@@ -308,30 +312,29 @@ a {
             .payment-badge {
               font-size: 0.75rem;
               border-radius: 9999px;
-              border: 1px solid #EAECF0;
-              background: #F9FAFB;
+              border: 1px solid #eaecf0;
+              background: #f9fafb;
               padding: 2px 8px;
               color: #475467;
 
               &::before {
-                content: '• ';
+                content: "• ";
               }
             }
           }
 
-          >sub.email,
-          >sub.order-id,
-          >sub.quantity {
+          > sub.email,
+          > sub.order-id,
+          > sub.quantity {
             font-size: 1rem;
             color: #475467;
           }
         }
 
-
-        >.info {
+        > .info {
           color: gray;
 
-          >h4.about {
+          > h4.about {
             margin: 0;
             font-size: 0.875rem;
             font-weight: 500;
@@ -387,28 +390,31 @@ a {
   }
 }
 
-
-@media screen and (max-width: 1200px) {
+@media screen and (min-width: 1200px) {
   .layout {
-    >nav {
-      >img:first-child {
+    grid-template-columns: 200px 1fr;
+
+    > nav {
+      padding: 30px;
+
+      > img:first-child {
         width: 135px;
         height: auto;
       }
     }
+
+    > main {
+      padding: 42px;
+    }
   }
 }
 
-
 @media screen and (max-width: 768px) {
   .layout {
-    grid-template-columns: 200px 1fr;
-
-    >nav {
-      >img:first-child {
+    > nav {
+      > img:first-child {
         width: 100px;
         height: auto;
-        transform: translateX(0);
       }
     }
   }
